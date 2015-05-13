@@ -7,7 +7,6 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 
 
-
 try {
   var priv = require('./credentials.js');
   var userFreeSMS = priv.userFreeSMS;

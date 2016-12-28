@@ -19,23 +19,25 @@ try {
 var message1 = new NewtifryProMessage();
 
 message1.setTitle('test message 1');
-message1.setMessage('OOAPI test');
-message1.setSticky();
+message1.setMessage('OOAPI test SMS HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+//message1.setSticky();
 
-var SMSMsg = message1.getMessage();
 
-var url = 'https://smsapi.free-mobile.fr/sendmsg?user=' + userFreeSMS + '&pass=' + passwordFreeSMS + '&msg=' + encodeURIComponent(SMSMsg);
-https.get(url, function(res) {
-  if(res.statusCode != 200){
+message1.sendMessage(sendFreeSMS);
+
+// i don't have a usb gdm card so i use the free mobile facility to test
+function sendFreeSMS(message) {
+  var url = 'https://smsapi.free-mobile.fr/sendmsg?user=' + userFreeSMS + '&pass=' + passwordFreeSMS + '&msg=' + encodeURIComponent(message);
+  https.get(url, function(res) {
+    if(res.statusCode != 200){
+      console.log('Send SMS Error' + res.statusCode);
+    } else {
+      console.log('Send SMS Done');
+    }
+    res.resume();
+  }).on('error', function(e) {
     console.log('Send SMS Error');
-  } else {
-    console.log('Send SMS Done');
-  }
-  res.resume();
-}).on('error', function(e) {
-  console.log('Send SMS Error');
-});
-
-
+  });
+}
 
 
